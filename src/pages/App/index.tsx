@@ -1,7 +1,8 @@
 import React from 'react'
 import './App.css'
+import Contacts from 'pages/Contacts'
 
 const App: React.FC = () => (
-  <h1>hello world!</h1>
+  <Contacts />
 )
 export default App

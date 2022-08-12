@@ -8,3 +8,5 @@ const Layout: React.FC = () => (
     <Outlet />
   </main>
 )
+
+export default Layout

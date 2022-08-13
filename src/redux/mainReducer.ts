@@ -1,13 +1,17 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface Contact {
+export interface Contact {
   name: null | string
-  phoneNumber: null | number
+  phoneNumber: null | string
 }
 type StateType = Array<Contact>
 
 const initialState: StateType = [
-  { name: '', phoneNumber: null }
+  { name: 'John Doe', phoneNumber: '333-555-321' },
+  { name: 'John Doe', phoneNumber: '333-555-321' },
+  { name: 'John Doe', phoneNumber: '333-555-321' },
+  { name: 'John Doe', phoneNumber: '333-555-321' },
+  { name: 'John Doe', phoneNumber: '333-555-321' },
 ]
 const contactsSlice = createSlice({
   name: 'contacts-main-slice',

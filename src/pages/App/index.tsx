@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Contacts from 'pages/Contacts'
 import PageNotFound from 'pages/NotFound'
 import Layout from 'components/Layout'
-import './App.css'
-import SignIn from 'pages/SignIn'
+import Loader from 'components/Loader'
+
+const Contacts = React.lazy(() => import('pages/Contacts'))
+const SignIn = React.lazy(() => import('pages/SignIn'))
 
 const App: React.FC = () => (
-  <Routes>
-    <Route path="/" element={<Layout />} >
-      <Route index element={<Contacts />} />
-      <Route path="*" element={<PageNotFound />} />
-      <Route path="sign-in" element={<SignIn />} />
-    </Route>
-  </Routes>
+  <Suspense fallback={<Loader />}>
+    <Routes>
+      <Route path="/" element={<Layout />} >
+        <Route index element={<Contacts />} />
+        <Route path="*" element={<PageNotFound />} />
+        <Route path="sign-in" element={<SignIn />} />
+      </Route>
+    </Routes>
+  </Suspense>
 )
 export default App

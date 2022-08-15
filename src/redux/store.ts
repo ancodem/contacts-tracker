@@ -3,7 +3,7 @@ import contactsReducer from 'redux/mainReducer'
 
 export const store = configureStore({
   reducer: {
-    contacts: contactsReducer
+    main: contactsReducer
   }
 })
 

@@ -18,7 +18,7 @@ const contactsSlice = createSlice({
   initialState,
   reducers: {
     addContact: (state, action: PayloadAction<Contact>) => {
-      state.concat(action.payload)
+      state.push(action.payload)
     },
   }
 })

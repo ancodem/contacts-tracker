@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
-import { Card, Container, CardContent, Typography, Button } from '@mui/material'
+import { Button } from '@mui/material'
 import { Contact } from 'redux/mainReducer'
 import { useAppSelector } from 'hooks'
 import ModalWindow from 'components/ModalWindow'
+import ContactCard from 'components/ContactCard'
+import ContactsContainenr from './styles'
 
 const Contacts: React.FC = () => {
 
@@ -18,38 +20,22 @@ const Contacts: React.FC = () => {
   const handleClose = () => setOpen(false)
 
   return (
-    <Container sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      padding: '40px',
-      flexDirection: 'column',
-      alignItems: 'center'
-    }}>
+    <main>
       <Button
         onClick={handleOpen}
         variant="outlined">
         Add
       </Button>
-      <ModalWindow open={open} handleClose={handleClose} />
-      {contacts.map((contact: Contact): ReactJSXElement =>
-        <Card key={contact.name}
-          sx={{
-            width: '10em',
-            marginTop: '20px',
-          }}
-        >
-          <CardContent>
-            <Typography sx={{ fontSize: '10pt', color: 'gray' }}>
-              {contact.name}
-            </Typography>
-            <Typography>
-              {contact.phoneNumber}
-            </Typography>
-
-          </CardContent>
-        </Card>
-      )}
-    </Container>
+      <ContactsContainenr>
+        <ModalWindow open={open} handleClose={handleClose} />
+        {contacts.map((contact: Contact): ReactJSXElement =>
+          <ContactCard
+            name={contact.name}
+            phoneNumber={contact.phoneNumber}
+          />
+        )}
+      </ContactsContainenr>
+    </main>
   )
 }
 export default Contacts

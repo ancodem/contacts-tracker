@@ -8,7 +8,7 @@ const ContactsContainenr = styled(Container)(({ theme }) => ({
   padding: '40px',
   flexDirection: 'row',
   flexWrap: 'wrap',
-  border: `solid 1px blue`,
+  border: 'solid 1px blue',
 })) as typeof Container
 
 export default ContactsContainenr

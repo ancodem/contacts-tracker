@@ -8,13 +8,13 @@ interface ModalProps {
 }
 
 const ModalWindow: React.FC<ModalProps> = ({ open, handleClose }) => {
+  // STATE ------------------------------------------------------------------>
   const {
     addContact,
     changeNameInput,
     changePhoneInput,
   } = useActions()
 
-  // STATE ------------------------------------------------------------------>
   const { name, phoneNumber } = useAppSelector(
     state => ({
       name: state.main.contactInput.name,
@@ -33,7 +33,7 @@ const ModalWindow: React.FC<ModalProps> = ({ open, handleClose }) => {
 
   // BUTTON ----------------------------------------------------------------->
   const handleAddingContact = () => {
-    addContact()
+    addContact(Date.now())
     handleClose()
   }
 

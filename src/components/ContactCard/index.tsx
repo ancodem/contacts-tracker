@@ -4,13 +4,16 @@ import { Contact } from 'redux/mainReducer'
 import { useActions } from 'hooks'
 import { CardContainer, EditContactIcon, DeleteContactIcon } from './styles'
 
-const ContactCard: React.FC<Contact> = ({ name, phoneNumber }) => {
+const ContactCard: React.FC<Contact> = ({ name, phoneNumber, id }) => {
   // STATE ------------------------------------------------------------------>
   const { deleteContact } = useActions()
 
   // ICONS ------------------------------------------------------------------>
   const handleContactDeletion = () => {
-    deleteContact({ name, phoneNumber })
+    deleteContact(id)
+  }
+  const handleContactEditing = () => {
+    //
   }
 
   return (

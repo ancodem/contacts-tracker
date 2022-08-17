@@ -30,6 +30,8 @@ const Contacts: React.FC = () => {
         <ModalWindow open={open} handleClose={handleClose} />
         {contacts.map((contact: Contact): ReactJSXElement =>
           <ContactCard
+            key={contact.id}
+            id={contact.id}
             name={contact.name}
             phoneNumber={contact.phoneNumber}
           />

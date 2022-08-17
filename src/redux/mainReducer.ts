@@ -30,8 +30,22 @@ const contactsSlice = createSlice({
   reducers: {
     addContact: (state) => {
       state.contactsList.push({ ...state.contactInput })
+      // eslint-disable-next-line
       state.contactInput.name = initialState.contactInput.name
+      // eslint-disable-next-line
       state.contactInput.phoneNumber = initialState.contactInput.phoneNumber
+    },
+    deleteContact: (state, action: PayloadAction<Contact>) => {
+      const contactToBeDeleted = state.contactsList.indexOf(action.payload)
+      state.contactsList.splice(contactToBeDeleted, 1)
+    },
+    editContact: (state, action: PayloadAction<Contact>) => {
+      const contactToBeEdited = state.contactsList.indexOf(action.payload)
+      state.contactsList.splice(
+        contactToBeEdited,
+        1,
+        { ...state.contactInput },
+      )
     },
     changeNameInput: (
       state, action: PayloadAction<string>) => {
@@ -46,10 +60,6 @@ const contactsSlice = createSlice({
   }
 })
 
-export const {
-  addContact,
-  changeNameInput,
-  changePhoneInput
-} = contactsSlice.actions
+export const allActions = contactsSlice.actions
 
 export default contactsSlice.reducer

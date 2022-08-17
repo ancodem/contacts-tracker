@@ -1,7 +1,6 @@
 import React from 'react'
 import { Paper, Button, FormGroup, Input, Modal } from '@mui/material'
-import { addContact, changeNameInput, changePhoneInput } from 'redux/mainReducer'
-import { useAppSelector, useAppDispatch } from 'hooks'
+import { useAppSelector, useActions } from 'hooks'
 
 interface ModalProps {
   open: boolean
@@ -9,7 +8,11 @@ interface ModalProps {
 }
 
 const ModalWindow: React.FC<ModalProps> = ({ open, handleClose }) => {
-  const dispatch = useAppDispatch()
+  const {
+    addContact,
+    changeNameInput,
+    changePhoneInput,
+  } = useActions()
 
   // STATE ------------------------------------------------------------------>
   const { name, phoneNumber } = useAppSelector(
@@ -21,16 +24,16 @@ const ModalWindow: React.FC<ModalProps> = ({ open, handleClose }) => {
 
   // INPUTS ----------------------------------------------------------------->
   const onNameChange = (input: string) => {
-    dispatch(changeNameInput(input))
+    changeNameInput(input)
   }
 
   const onPhoneNumberChange = (input: string) => {
-    dispatch(changePhoneInput(input))
+    changePhoneInput(input)
   }
 
   // BUTTON ----------------------------------------------------------------->
   const handleAddingContact = () => {
-    dispatch(addContact())
+    addContact()
     handleClose()
   }
 

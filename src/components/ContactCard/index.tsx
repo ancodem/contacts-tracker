@@ -1,23 +1,36 @@
 import React from 'react'
 import { CardContent, Typography } from '@mui/material'
 import { Contact } from 'redux/mainReducer'
+import { useActions } from 'hooks'
 import { CardContainer, EditContactIcon, DeleteContactIcon } from './styles'
 
-const ContactCard: React.FC<Contact> = ({ name, phoneNumber }) => (
-  <CardContainer>
-    <EditContactIcon />
-    <DeleteContactIcon />
-    <CardContent>
-      <Typography sx={{ fontSize: '10pt', color: 'gray' }}>
-        {name}
-      </Typography>
-      <Typography>
-        {phoneNumber}
-      </Typography>
+const ContactCard: React.FC<Contact> = ({ name, phoneNumber }) => {
+  // STATE ------------------------------------------------------------------>
+  const { deleteContact } = useActions()
 
-    </CardContent>
-  </CardContainer>
+  // ICONS ------------------------------------------------------------------>
+  const handleContactDeletion = () => {
+    deleteContact({ name, phoneNumber })
+  }
 
-)
+  return (
+    <CardContainer>
+      <EditContactIcon
+        onClick={() => alert('editing')}
+      />
+      <DeleteContactIcon
+        onClick={handleContactDeletion}
+      />
+      <CardContent>
+        <Typography sx={{ fontSize: '10pt', color: 'gray' }}>
+          {name}
+        </Typography>
+        <Typography>
+          {phoneNumber}
+        </Typography>
+      </CardContent>
+    </CardContainer>
+  )
+}
 
 export default ContactCard

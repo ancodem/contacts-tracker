@@ -38,6 +38,7 @@ const contactsSlice = createSlice({
   name: 'contacts-main-slice',
   initialState,
   reducers: {
+
     addContact: (state, action: PayloadAction<number>) => {
       state.contactsList.push({
         ...state.contactInput,
@@ -48,16 +49,19 @@ const contactsSlice = createSlice({
       // eslint-disable-next-line
       state.contactInput.phoneNumber = initialState.contactInput.phoneNumber
     },
+
     deleteContact: (state, action: PayloadAction<number>) => {
       const contactToDelete = state.contactsList.findIndex(
         contact => contact.id === action.payload
       )
       state.contactsList.splice(contactToDelete, 1)
     },
+
     setEditedContactId: (state, action: PayloadAction<number>) => {
       // eslint-disable-next-line
       state.editingMode.editedContactId = action.payload
     },
+
     editContact: (state) => {
       const contactToBeEdited = state.contactsList.findIndex(
         contact => contact.id === state.editingMode.editedContactId
@@ -70,11 +74,13 @@ const contactsSlice = createSlice({
       // eslint-disable-next-line
       state.contactInput = { id: 0, name: '', phoneNumber: '' }
     },
+
     changeNameInput: (
       state, action: PayloadAction<string>) => {
       // eslint-disable-next-line
       state.contactInput.name = action.payload
     },
+
     changePhoneInput: (
       state, action: PayloadAction<string>) => {
       // eslint-disable-next-line

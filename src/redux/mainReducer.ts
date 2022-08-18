@@ -2,18 +2,24 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface Contact {
   id: number
-  name: null | string
-  phoneNumber: null | string
+  name: string
+  phoneNumber: string
 }
 
 interface StateType {
-  isEditMode: boolean
+  editingMode: {
+    isInEditingMode: boolean
+    editedContactId: number
+  }
   contactInput: Contact
   contactsList: Array<Contact>
 }
 
 const initialState: StateType = {
-  isEditMode: false,
+  editingMode: {
+    isInEditingMode: false,
+    editedContactId: 0,
+  },
   contactInput: {
     id: 0,
     name: '',
@@ -48,13 +54,21 @@ const contactsSlice = createSlice({
       )
       state.contactsList.splice(contactToDelete, 1)
     },
-    editContact: (state, action: PayloadAction<Contact>) => {
-      const contactToBeEdited = state.contactsList.indexOf(action.payload)
+    setEditedContactId: (state, action: PayloadAction<number>) => {
+      // eslint-disable-next-line
+      state.editingMode.editedContactId = action.payload
+    },
+    editContact: (state) => {
+      const contactToBeEdited = state.contactsList.findIndex(
+        contact => contact.id === state.editingMode.editedContactId
+      )
       state.contactsList.splice(
         contactToBeEdited,
         1,
         { ...state.contactInput },
       )
+      // eslint-disable-next-line
+      state.contactInput = { id: 0, name: '', phoneNumber: '' }
     },
     changeNameInput: (
       state, action: PayloadAction<string>) => {

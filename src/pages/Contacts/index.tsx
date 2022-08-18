@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
-import { Button } from '@mui/material'
+import { Button, Fab } from '@mui/material'
 import { Contact } from 'redux/mainReducer'
 import { useActions, useAppSelector } from 'hooks'
 import ModalWindow from 'components/ModalWindow'
@@ -22,11 +22,18 @@ const Contacts: React.FC = () => {
 
   return (
     <main>
-      <Button
+      <Fab
+        variant="extended"
         onClick={handleOpen}
-        variant="outlined">
-        Add
-      </Button>
+        color="primary" aria-label="add"
+        sx={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+        }}
+      >
+        add contact
+      </Fab>
       <ContactsContainenr>
         <ModalWindow
           open={open}

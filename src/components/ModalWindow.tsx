@@ -1,24 +1,30 @@
 import React from 'react'
-import { Paper, Button, FormGroup, Input, Modal } from '@mui/material'
+import { Paper, Button, FormGroup, Input, Modal, Typography } from '@mui/material'
 import { useAppSelector, useActions } from 'hooks'
+
+type ClickPayload = number & null
 
 interface ModalProps {
   open: boolean
   handleClose: () => void
+  buttonText: string
+  actionOnClick: (payload: ClickPayload) => void
 }
 
-const ModalWindow: React.FC<ModalProps> = ({ open, handleClose }) => {
+const ModalWindow: React.FC<ModalProps> = (
+  { open, buttonText, actionOnClick, handleClose }
+) => {
   // STATE ------------------------------------------------------------------>
   const {
-    addContact,
     changeNameInput,
     changePhoneInput,
   } = useActions()
 
-  const { name, phoneNumber } = useAppSelector(
+  const { name, phoneNumber, isInEditingMode } = useAppSelector(
     state => ({
       name: state.main.contactInput.name,
       phoneNumber: state.main.contactInput.phoneNumber,
+      isInEditingMode: state.main.editingMode.isInEditingMode,
     })
   )
 
@@ -32,8 +38,8 @@ const ModalWindow: React.FC<ModalProps> = ({ open, handleClose }) => {
   }
 
   // BUTTON ----------------------------------------------------------------->
-  const handleAddingContact = () => {
-    addContact(Date.now())
+  const handleClick = (payload: ClickPayload) => {
+    actionOnClick(payload)
     handleClose()
   }
 
@@ -75,9 +81,11 @@ const ModalWindow: React.FC<ModalProps> = ({ open, handleClose }) => {
               placeholder='Phone Number' />
             <Button
               type="submit"
-              onClick={handleAddingContact}
+              onClick={handleClick}
               variant="outlined">
-              Add
+              <Typography>
+                {buttonText}
+              </Typography>
             </Button>
           </FormGroup>
         </Paper>

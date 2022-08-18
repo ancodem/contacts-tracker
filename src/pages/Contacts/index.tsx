@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import { Button } from '@mui/material'
 import { Contact } from 'redux/mainReducer'
-import { useAppSelector } from 'hooks'
+import { useActions, useAppSelector } from 'hooks'
 import ModalWindow from 'components/ModalWindow'
 import ContactCard from 'components/ContactCard'
 import ContactsContainenr from './styles'
@@ -13,6 +13,7 @@ const Contacts: React.FC = () => {
   const contacts: Array<Contact> = useAppSelector(
     state => state.main.contactsList
   )
+  const { addContact } = useActions()
 
   // MODAL WINDOW CONTROLS -------------------------------------------------->
   const [open, setOpen] = useState(false)
@@ -27,7 +28,12 @@ const Contacts: React.FC = () => {
         Add
       </Button>
       <ContactsContainenr>
-        <ModalWindow open={open} handleClose={handleClose} />
+        <ModalWindow
+          open={open}
+          handleClose={handleClose}
+          buttonText='Add'
+          actionOnClick={addContact}
+        />
         {contacts.map((contact: Contact): ReactJSXElement =>
           <ContactCard
             key={contact.id}

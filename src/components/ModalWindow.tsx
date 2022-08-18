@@ -2,13 +2,11 @@ import React from 'react'
 import { Paper, Button, FormGroup, Input, Modal, Typography } from '@mui/material'
 import { useAppSelector, useActions } from 'hooks'
 
-type ClickPayload = number & null
-
 interface ModalProps {
   open: boolean
   handleClose: () => void
   buttonText: string
-  actionOnClick: (payload: ClickPayload) => void
+  actionOnClick: (payload: number) => void
 }
 
 const ModalWindow: React.FC<ModalProps> = (
@@ -20,11 +18,10 @@ const ModalWindow: React.FC<ModalProps> = (
     changePhoneInput,
   } = useActions()
 
-  const { name, phoneNumber, isInEditingMode } = useAppSelector(
+  const { name, phoneNumber } = useAppSelector(
     state => ({
       name: state.main.contactInput.name,
       phoneNumber: state.main.contactInput.phoneNumber,
-      isInEditingMode: state.main.editingMode.isInEditingMode,
     })
   )
 
@@ -38,7 +35,8 @@ const ModalWindow: React.FC<ModalProps> = (
   }
 
   // BUTTON ----------------------------------------------------------------->
-  const handleClick = (payload: ClickPayload) => {
+  const handleClick = () => {
+    const payload = Date.now()
     actionOnClick(payload)
     handleClose()
   }

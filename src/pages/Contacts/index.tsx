@@ -5,7 +5,7 @@ import { Contact } from 'redux/mainReducer'
 import { useActions, useAppSelector } from 'hooks'
 import ModalWindow from 'components/ModalWindow'
 import ContactCard from 'components/ContactCard'
-import ContactsContainenr from './styles'
+import { ContactsContainenr } from './styles'
 
 const Contacts: React.FC = () => {
 

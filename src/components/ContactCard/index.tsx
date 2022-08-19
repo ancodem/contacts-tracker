@@ -7,8 +7,7 @@ import { CardContainer, EditContactIcon, DeleteContactIcon } from './styles'
 
 const ContactCard: React.FC<Contact> = ({ name, phoneNumber, id }) => {
   // STATE ------------------------------------------------------------------>
-  const { deleteContact } = useActions()
-  const { editContact, setEditedContactId } = useActions()
+  const { deleteContact, editContact, setEditedContactId } = useActions()
   const [isOpen, setIsOpen] = useState(false)
 
   // CONTROLS --------------------------------------------------------------->

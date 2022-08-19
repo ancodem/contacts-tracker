@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
-import { Button, Fab } from '@mui/material'
+import { Autocomplete, Fab, TextField } from '@mui/material'
 import { Contact } from 'redux/mainReducer'
 import { useActions, useAppSelector } from 'hooks'
 import ModalWindow from 'components/ModalWindow'
@@ -22,6 +22,22 @@ const Contacts: React.FC = () => {
 
   return (
     <main>
+      <Autocomplete
+        freeSolo
+        autoHighlight
+        options={contacts.map((contact) => contact.name)}
+        renderInput={
+          (params) =>
+            <TextField
+              {...params}
+              label="Поиск контактов"
+            />
+        }
+        sx={{
+          width: '40%',
+          margin: '20px auto',
+        }}
+      />
       <Fab
         variant="extended"
         onClick={handleOpen}

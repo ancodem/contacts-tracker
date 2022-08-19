@@ -29,15 +29,14 @@ const ModalWindow: React.FC<ModalProps> = (
   const onNameChange = (input: string) => {
     changeNameInput(input)
   }
-
   const onPhoneNumberChange = (input: string) => {
     changePhoneInput(input)
   }
 
   // BUTTON ----------------------------------------------------------------->
   const handleClick = () => {
-    const payload = Date.now()
-    actionOnClick(payload)
+    const id = Date.now()
+    actionOnClick(id)
     handleClose()
   }
 

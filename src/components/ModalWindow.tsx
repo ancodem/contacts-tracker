@@ -1,17 +1,23 @@
 import React from 'react'
-import { Paper, Button, FormGroup, Input, Modal } from '@mui/material'
-import { addContact, changeNameInput, changePhoneInput } from 'redux/mainReducer'
-import { useAppSelector, useAppDispatch } from 'hooks'
+import { Paper, Button, FormGroup, Input, Modal, Typography } from '@mui/material'
+import { useAppSelector, useActions } from 'hooks'
 
 interface ModalProps {
   open: boolean
   handleClose: () => void
+  buttonText: string
+  actionOnClick: (payload: number) => void
 }
 
-const ModalWindow: React.FC<ModalProps> = ({ open, handleClose }) => {
-  const dispatch = useAppDispatch()
-
+const ModalWindow: React.FC<ModalProps> = (
+  { open, buttonText, actionOnClick, handleClose }
+) => {
   // STATE ------------------------------------------------------------------>
+  const {
+    changeNameInput,
+    changePhoneInput,
+  } = useActions()
+
   const { name, phoneNumber } = useAppSelector(
     state => ({
       name: state.main.contactInput.name,
@@ -21,16 +27,16 @@ const ModalWindow: React.FC<ModalProps> = ({ open, handleClose }) => {
 
   // INPUTS ----------------------------------------------------------------->
   const onNameChange = (input: string) => {
-    dispatch(changeNameInput(input))
+    changeNameInput(input)
   }
-
   const onPhoneNumberChange = (input: string) => {
-    dispatch(changePhoneInput(input))
+    changePhoneInput(input)
   }
 
   // BUTTON ----------------------------------------------------------------->
-  const handleAddingContact = () => {
-    dispatch(addContact())
+  const handleClick = () => {
+    const id = Date.now()
+    actionOnClick(id)
     handleClose()
   }
 
@@ -72,9 +78,11 @@ const ModalWindow: React.FC<ModalProps> = ({ open, handleClose }) => {
               placeholder='Phone Number' />
             <Button
               type="submit"
-              onClick={handleAddingContact}
+              onClick={handleClick}
               variant="outlined">
-              Add
+              <Typography>
+                {buttonText}
+              </Typography>
             </Button>
           </FormGroup>
         </Paper>
